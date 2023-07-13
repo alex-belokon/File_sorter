@@ -1,9 +1,19 @@
-body{
+body {
+    max-width: 1600px;
     margin: 0 auto;
-    max-width: 1280px;
-    background-color: rgb(235, 91, 91);
+    background-image: url(/File_sorter/background.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:aqua;
+    letter-spacing: 2px;
+    font-family: 'VT323', monospace;
 }
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-h1{
-    text-align: center;
+}
+.audio-player {
+    height: 20px;
 }
