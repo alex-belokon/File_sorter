@@ -1,0 +1,9 @@
+body{
+    margin: 0 auto;
+    max-width: 1280px;
+    background-color: rgb(235, 91, 91);
+}
+
+h1{
+    text-align: center;
+}
