@@ -5,8 +5,8 @@ IMAGES = []
 VIDEOS = []
 DOCUMENTS = []
 AUDIO = []
-ARCHIVES = []
-MY_OTHER = []
+HANDLE_ARCHIVE = []
+HANDLE_OTHER = []
 
 REGISTER_EXTENSION = {
     'JPEG': IMAGES,
@@ -27,9 +27,9 @@ REGISTER_EXTENSION = {
     'OGG': AUDIO,
     'WAV': AUDIO,
     'AMR': AUDIO,
-    'ZIP': ARCHIVES,
-    'GZ': ARCHIVES,
-    'TAR': ARCHIVES,
+    'ZIP': HANDLE_ARCHIVE,
+    'GZ': HANDLE_ARCHIVE,
+    'TAR': HANDLE_ARCHIVE,
 }
 
 FOLDERS = []
@@ -44,7 +44,7 @@ def scan(folder: Path) -> None:
         # Якщо це папка то додаємо її до списку FOLDERS і переходимо до наступного елемента папки
         if item.is_dir():
             # перевіряємо, щоб папка не була тією в яку ми складаємо вже файли
-            if item.name not in ('archives', 'video', 'audio', 'documents', 'images', 'MY_OTHER'):
+            if item.name not in ('HANDLE_ARCHIVE', 'video', 'audio', 'documents', 'images', 'other'):
                 FOLDERS.append(item)
                 # скануємо вкладену папку
                 scan(item)  # рекурсія
@@ -54,7 +54,7 @@ def scan(folder: Path) -> None:
         ext = get_extension(item.name)  # беремо розширення файлу
         fullname = folder / item.name  # беремо шлях до файлу
         if not ext:  # якщо файл немає розширення то додаєм до невідомих
-            MY_OTHER.append(fullname)
+            HANDLE_OTHER.append(fullname)
         else:
             try:
                 container = REGISTER_EXTENSION[ext]
@@ -63,7 +63,7 @@ def scan(folder: Path) -> None:
             except KeyError:
                 # Якщо ми не зареєстрували розширення у REGISTER_EXTENSION, то додаємо до невідомих
                 UNKNOWN.add(ext)
-                MY_OTHER.append(fullname)
+                HANDLE_OTHER.append(fullname)
 
 
 if __name__ == "__main__":
@@ -74,10 +74,10 @@ if __name__ == "__main__":
     print(f'Images jpg: {JPG_IMAGES}')
     print(f'Images svg: {SVG_IMAGES}')
     print(f'Audio mp3: {MP3_AUDIO}')
-    print(f'Archives: {ARCHIVES}')
+    print(f'Archives: {HANDLE_ARCHIVE}')
 
     print(f'Types of files in folder: {EXTENSION}')
     print(f'Unknown files of types: {UNKNOWN}')
-    print(f'MY_OTHER: {MY_OTHER}')
+    print(f'Others: {HANDLE_OTHER}')
 
     print(FOLDERS)

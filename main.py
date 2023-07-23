@@ -39,10 +39,10 @@ def main(folder: Path):
         handle_media(file, folder / 'video')
     for file in parser.DOCUMENTS:
         handle_media(file, folder / 'documents')
-    for file in parser.MY_OTHER:
-        handle_media(file, folder / 'MY_OTHER')
-    for file in parser.ARCHIVES:
-        handle_media(file, folder / 'ARCHIVES')
+    for file in parser.HANDLE_OTHER:
+        handle_media(file, folder / 'other')
+    for file in parser.HANDLE_ARCHIVE:
+        handle_media(file, folder / 'archives')
 
     for folder in parser.FOLDERS[::-1]:
         handle_folder(folder)
